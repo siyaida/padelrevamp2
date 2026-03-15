@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -7,10 +9,22 @@ import {
   Video,
   ShoppingBag,
   Coffee,
+  ArrowRight,
+  ChevronRight,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+};
 
 const courts = [
   {
@@ -44,31 +58,37 @@ const amenities = [
     icon: Home,
     name: "Clubhouse",
     description: "Modern clubhouse with lounge area, cafe, and pro shop",
+    color: "from-green-500 to-emerald-600",
   },
   {
     icon: Lock,
     name: "Locker Rooms",
     description: "Secure locker rooms with showers and changing facilities",
+    color: "from-blue-500 to-indigo-600",
   },
   {
     icon: Wifi,
     name: "Free Wi-Fi",
     description: "High-speed internet access throughout the facility",
+    color: "from-violet-500 to-purple-600",
   },
   {
     icon: Video,
     name: "Video Analysis",
     description: "Professional video analysis system for game improvement",
+    color: "from-amber-500 to-orange-600",
   },
   {
     icon: ShoppingBag,
     name: "Pro Shop",
     description: "Full-service pro shop with equipment and accessories",
+    color: "from-rose-500 to-pink-600",
   },
   {
     icon: Coffee,
     name: "Cafe",
     description: "On-site cafe serving refreshments and light meals",
+    color: "from-teal-500 to-cyan-600",
   },
 ];
 
@@ -101,148 +121,325 @@ const equipment = [
 
 export default function FacilitiesPage() {
   return (
-    <main className="min-h-screen">
-      {/* Hero */}
-      <section className="bg-slate-900 py-20 text-white">
-        <div className="mx-auto max-w-6xl px-4 text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            Our Facilities
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-300">
-            Experience padel in a world-class environment with state-of-the-art
-            courts and premium amenities
-          </p>
+    <>
+      {/* Hero Section */}
+      <section className="relative min-h-[70vh] overflow-hidden bg-slate-950">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src={courts[0].image}
+            alt="Padel Society Facilities"
+            fill
+            className="object-cover"
+            priority
+            unoptimized
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/85 to-slate-950/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/30" />
         </div>
+
+        {/* Decorative radial */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_50%,rgba(34,197,94,0.08),transparent_60%)]" />
+
+        <div className="relative z-10 mx-auto flex min-h-[70vh] max-w-7xl items-center px-6 lg:px-8">
+          <div className="max-w-2xl py-32">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] as const }}
+            >
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-green-500/20 bg-green-500/10 px-4 py-1.5">
+                <div className="size-2 rounded-full bg-green-400 animate-pulse" />
+                <span className="text-sm font-medium text-green-400">
+                  World-Class Venues
+                </span>
+              </div>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.8,
+                delay: 0.1,
+                ease: [0.22, 1, 0.36, 1] as const,
+              }}
+              className="text-5xl font-bold leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl"
+            >
+              Our{" "}
+              <span className="gradient-text">Facilities</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.8,
+                delay: 0.2,
+                ease: [0.22, 1, 0.36, 1] as const,
+              }}
+              className="mt-6 max-w-lg text-lg leading-relaxed text-slate-400"
+            >
+              Experience padel in a world-class environment with
+              state-of-the-art courts and premium amenities designed for
+              players of every level.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.8,
+                delay: 0.3,
+                ease: [0.22, 1, 0.36, 1] as const,
+              }}
+              className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center"
+            >
+              <Link href="/reservations">
+                <Button className="h-14 bg-green-600 px-8 text-base font-semibold text-white shadow-2xl shadow-green-600/30 transition-all hover:bg-green-500 hover:shadow-green-600/40 hover:-translate-y-0.5">
+                  Book a Court
+                  <ArrowRight className="ml-2 size-4" />
+                </Button>
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        >
+          <div className="flex flex-col items-center gap-2 text-slate-500">
+            <span className="text-xs uppercase tracking-widest">Scroll</span>
+            <div className="h-12 w-px bg-gradient-to-b from-slate-500 to-transparent" />
+          </div>
+        </motion.div>
       </section>
 
-      {/* Courts */}
-      <section className="py-16">
-        <div className="mx-auto max-w-6xl px-4">
-          <h2 className="mb-2 text-center text-3xl font-bold text-slate-900">
-            Professional Courts
-          </h2>
-          <p className="mb-10 text-center text-slate-600">
-            10 premium courts designed for players of all levels
-          </p>
-          <div className="grid gap-8 md:grid-cols-3">
-            {courts.map((court) => (
-              <Card key={court.name} className="overflow-hidden border-0 shadow-lg">
-                <div className="relative h-56 w-full">
+      {/* Courts Section */}
+      <section className="relative overflow-hidden bg-slate-950 py-24 lg:py-32">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,197,94,0.06),transparent_70%)]" />
+
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
+            variants={fadeUp}
+            className="text-center"
+          >
+            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-green-400">
+              Play Your Way
+            </span>
+            <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+              Professional Courts
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-400">
+              10 premium courts designed for players of all levels
+            </p>
+          </motion.div>
+
+          <div className="mt-16 grid gap-6 md:grid-cols-3">
+            {courts.map((court, i) => (
+              <motion.div
+                key={court.name}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+                variants={fadeUp}
+                className="group relative overflow-hidden rounded-2xl"
+              >
+                <div className="relative aspect-[4/5] w-full">
                   <Image
                     src={court.image}
                     alt={court.name}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
                     unoptimized
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
                 </div>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-lg font-semibold text-slate-900">
-                      {court.name}
-                    </CardTitle>
-                    <Badge className="bg-green-600 text-white">
-                      {court.type}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-slate-600">{court.description}</p>
-                </CardContent>
-              </Card>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <Badge className="mb-3 rounded-full border-0 bg-green-600/20 px-3 py-1 text-xs font-semibold text-green-400 backdrop-blur-sm">
+                    {court.type}
+                  </Badge>
+                  <h3 className="text-xl font-bold text-white">
+                    {court.name}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-300/80">
+                    {court.description}
+                  </p>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Amenities */}
-      <section className="bg-slate-50 py-16">
-        <div className="mx-auto max-w-6xl px-4">
-          <h2 className="mb-2 text-center text-3xl font-bold text-slate-900">
-            Premium Amenities
-          </h2>
-          <p className="mb-10 text-center text-slate-600">
-            Everything you need for the perfect padel experience
-          </p>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {amenities.map((amenity) => {
+      {/* Amenities Section */}
+      <section className="relative overflow-hidden bg-white">
+        <div className="absolute inset-0 mesh-gradient" />
+        <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
+            variants={fadeUp}
+            className="text-center"
+          >
+            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-green-600">
+              Beyond the Court
+            </span>
+            <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl lg:text-5xl">
+              Premium Amenities
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-500">
+              Everything you need for the perfect padel experience
+            </p>
+          </motion.div>
+
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {amenities.map((amenity, i) => {
               const Icon = amenity.icon;
               return (
-                <Card
+                <motion.div
                   key={amenity.name}
-                  className="border-0 shadow-md transition-shadow hover:shadow-lg"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-30px" }}
+                  custom={i}
+                  variants={fadeUp}
                 >
-                  <CardContent className="flex items-start gap-4 pt-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-600">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-slate-900">
+                  <Card className="group relative overflow-hidden border-0 bg-white shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-1">
+                    <CardContent className="relative flex flex-col items-start gap-4 p-7">
+                      <div
+                        className={`flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br ${amenity.color} shadow-lg`}
+                      >
+                        <Icon className="size-6 text-white" />
+                      </div>
+                      <h3 className="text-lg font-bold text-slate-900">
                         {amenity.name}
                       </h3>
-                      <p className="mt-1 text-sm text-slate-600">
+                      <p className="text-[15px] leading-relaxed text-slate-500">
                         {amenity.description}
                       </p>
-                    </div>
-                  </CardContent>
-                </Card>
+                      <div className="flex items-center gap-1 text-sm font-medium text-green-600 opacity-0 transition-all duration-300 group-hover:opacity-100">
+                        Learn more <ChevronRight className="size-3.5" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* Equipment Rental */}
-      <section className="py-16">
-        <div className="mx-auto max-w-6xl px-4">
-          <h2 className="mb-2 text-center text-3xl font-bold text-slate-900">
-            Equipment Rental
-          </h2>
-          <p className="mb-10 text-center text-slate-600">
-            Don&apos;t have your own gear? We&apos;ve got you covered
-          </p>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {equipment.map((eq) => (
-              <Card
+      {/* Equipment Rental Section */}
+      <section className="relative overflow-hidden bg-slate-50">
+        <div className="absolute inset-0 mesh-gradient" />
+        <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
+            variants={fadeUp}
+            className="text-center"
+          >
+            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-green-600">
+              Gear Up
+            </span>
+            <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl lg:text-5xl">
+              Equipment Rental
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-500">
+              Don&apos;t have your own gear? We&apos;ve got you covered
+            </p>
+          </motion.div>
+
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {equipment.map((eq, i) => (
+              <motion.div
                 key={eq.item}
-                className="overflow-hidden border-0 shadow-md"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-30px" }}
+                custom={i}
+                variants={fadeUp}
               >
-                <div className="relative h-44 w-full">
-                  <Image
-                    src={eq.image}
-                    alt={eq.item}
-                    fill
-                    className="object-cover"
-                    unoptimized
-                  />
-                </div>
-                <CardContent className="pt-4">
-                  <h3 className="font-semibold text-slate-900">{eq.item}</h3>
-                  <p className="mt-1 text-lg font-bold text-green-600">
-                    {eq.price}
-                  </p>
-                </CardContent>
-              </Card>
+                <Card className="group overflow-hidden border-0 bg-white shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-1">
+                  <div className="relative h-52 w-full overflow-hidden">
+                    <Image
+                      src={eq.image}
+                      alt={eq.item}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      unoptimized
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                  </div>
+                  <CardContent className="p-5">
+                    <h3 className="text-lg font-bold text-slate-900">
+                      {eq.item}
+                    </h3>
+                    <p className="mt-1 text-lg font-bold gradient-text">
+                      {eq.price}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-slate-900 py-16 text-white">
-        <div className="mx-auto max-w-3xl px-4 text-center">
-          <h2 className="text-3xl font-bold">Ready to Play?</h2>
-          <p className="mt-4 text-lg text-slate-300">
-            Book a court now and experience our world-class facilities
-          </p>
-          <Link
-            href="/register"
-            className="mt-8 inline-flex items-center justify-center rounded-lg bg-green-600 px-8 py-3 text-base font-semibold text-white transition-colors hover:bg-green-700"
+      {/* CTA Section */}
+      <section className="relative overflow-hidden bg-slate-950 py-24 lg:py-32">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,197,94,0.12),transparent_60%)]" />
+        <div className="absolute inset-0 noise-overlay" />
+
+        <div className="relative mx-auto max-w-4xl px-6 text-center lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
+            variants={fadeUp}
           >
-            Book Now
-          </Link>
+            <h2 className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
+              Ready to{" "}
+              <span className="gradient-text">Play?</span>
+            </h2>
+            <p className="mt-6 text-lg text-slate-400">
+              Book a court now and experience our world-class facilities.
+              Your perfect game starts here.
+            </p>
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Link href="/reservations">
+                <Button className="h-14 bg-green-600 px-10 text-base font-semibold text-white shadow-2xl shadow-green-600/30 transition-all hover:bg-green-500 hover:shadow-green-600/40 hover:-translate-y-0.5">
+                  Book a Court
+                  <ArrowRight className="ml-2 size-4" />
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button
+                  variant="outline"
+                  className="h-14 border-white/20 bg-white/5 px-10 text-base text-white hover:bg-white/10"
+                >
+                  Contact Us
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
-    </main>
+    </>
   );
 }
