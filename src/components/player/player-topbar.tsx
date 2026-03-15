@@ -56,7 +56,7 @@ export function PlayerTopbar({ title }: { title: string }) {
           <button
             onClick={handleLogout}
             title={t("player.logout")}
-            className="ml-1 flex size-8 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-white/10 hover:text-red-400"
+            className="ml-1 flex size-8 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-white/10 hover:text-white"
           >
             <LogOut className="size-4" />
           </button>

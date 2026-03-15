@@ -31,9 +31,9 @@ export default function DashboardPage() {
 
   const stats = [
     { icon: Calendar, label: t("player.dashboard.nextMatch"), value: "Mar 18", color: "from-green-500 to-emerald-600" },
-    { icon: Ticket, label: t("player.dashboard.tickets"), value: `${ticketBalance.remaining}/${ticketBalance.total}`, color: "from-blue-500 to-cyan-600" },
-    { icon: Crown, label: t("player.dashboard.membership"), value: "Match", color: "from-amber-500 to-orange-600" },
-    { icon: TrendingUp, label: t("player.dashboard.winRate"), value: "68%", color: "from-purple-500 to-violet-600" },
+    { icon: Ticket, label: t("player.dashboard.tickets"), value: `${ticketBalance.remaining}/${ticketBalance.total}`, color: "from-green-600 to-emerald-700" },
+    { icon: Crown, label: t("player.dashboard.membership"), value: "Match", color: "from-emerald-500 to-green-700" },
+    { icon: TrendingUp, label: t("player.dashboard.winRate"), value: "68%", color: "from-green-400 to-emerald-600" },
   ];
 
   return (

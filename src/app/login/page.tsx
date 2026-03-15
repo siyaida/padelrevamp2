@@ -176,7 +176,7 @@ export default function LoginPage() {
                 initial={{ x: -10 }}
                 animate={{ x: [0, -8, 8, -5, 5, 0] }}
                 transition={{ duration: 0.4 }}
-                className="rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400"
+                className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300"
               >
                 {t("login.invalidCredentials")}
               </motion.div>

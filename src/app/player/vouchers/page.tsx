@@ -159,7 +159,7 @@ export default function VouchersPage() {
                       <p className="text-xs text-slate-500">{usage.date}</p>
                     </div>
                   </div>
-                  <span className="text-sm font-medium text-red-400">-{usage.tickets}</span>
+                  <span className="text-sm font-medium text-slate-400">-{usage.tickets}</span>
                 </div>
               ))}
             </div>

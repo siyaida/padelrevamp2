@@ -162,7 +162,7 @@ export default function MembershipPage() {
                       <td className="px-5 py-4 text-right text-sm text-white">{record.amount} TND</td>
                       <td className="px-5 py-4 text-right">
                         <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${
-                          record.status === "paid" ? "bg-green-500/15 text-green-400" : "bg-amber-500/15 text-amber-400"
+                          record.status === "paid" ? "bg-green-500/15 text-green-400" : "bg-emerald-500/15 text-emerald-300"
                         }`}>
                           {t(`player.membership.billing.${record.status}`)}
                         </span>

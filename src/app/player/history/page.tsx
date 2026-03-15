@@ -18,9 +18,9 @@ const fadeUp = {
 type FilterStatus = "all" | "upcoming" | "completed" | "cancelled";
 
 const statusConfig = {
-  upcoming: { color: "text-blue-400 bg-blue-500/15", icon: Clock },
+  upcoming: { color: "text-emerald-400 bg-emerald-500/15", icon: Clock },
   completed: { color: "text-green-400 bg-green-500/15", icon: CheckCircle },
-  cancelled: { color: "text-red-400 bg-red-500/15", icon: XCircle },
+  cancelled: { color: "text-slate-400 bg-slate-500/15", icon: XCircle },
 };
 
 export default function HistoryPage() {
