@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
+import { LanguageProvider } from "@/lib/language-context";
+import { AuthProvider } from "@/lib/auth-context";
+import { LayoutShell } from "@/components/layout-shell";
 import "./globals.css";
 
 const inter = Inter({
@@ -31,9 +32,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased`}>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <AuthProvider>
+            <LayoutShell>{children}</LayoutShell>
+          </AuthProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

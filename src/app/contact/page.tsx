@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Phone, Mail, MapPin, Send, CheckCircle } from "lucide-react";
+import { useTranslation } from "@/lib/language-context";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -18,31 +19,6 @@ const fadeUp = {
   }),
 };
 
-const contactInfo = [
-  {
-    icon: Phone,
-    title: "Phone",
-    value: "+216 23 456 789",
-    href: "tel:+21623456789",
-    gradient: "from-green-500 to-emerald-600",
-  },
-  {
-    icon: Mail,
-    title: "Email",
-    value: "nextconsulttn@gmail.com",
-    href: "mailto:nextconsulttn@gmail.com",
-    gradient: "from-emerald-500 to-teal-600",
-  },
-  {
-    icon: MapPin,
-    title: "Address",
-    value:
-      "Nouveau Club, 7 Rue du Royaume d'Arabie Saoudite, Tunis, Tunisie",
-    href: null,
-    gradient: "from-teal-500 to-cyan-600",
-  },
-];
-
 interface FormErrors {
   name?: string;
   email?: string;
@@ -51,6 +27,33 @@ interface FormErrors {
 }
 
 export default function ContactPage() {
+  const { t } = useTranslation();
+
+  const contactInfo = [
+    {
+      icon: Phone,
+      title: t("contact.phone"),
+      value: "+216 23 456 789",
+      href: "tel:+21623456789",
+      gradient: "from-green-500 to-emerald-600",
+    },
+    {
+      icon: Mail,
+      title: t("contact.email"),
+      value: "nextconsulttn@gmail.com",
+      href: "mailto:nextconsulttn@gmail.com",
+      gradient: "from-emerald-500 to-teal-600",
+    },
+    {
+      icon: MapPin,
+      title: t("contact.address"),
+      value:
+        "Nouveau Club, 7 Rue du Royaume d'Arabie Saoudite, Tunis, Tunisie",
+      href: null,
+      gradient: "from-teal-500 to-cyan-600",
+    },
+  ];
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -62,16 +65,16 @@ export default function ContactPage() {
 
   function validate(): FormErrors {
     const errs: FormErrors = {};
-    if (!formData.name.trim()) errs.name = "Name is required.";
+    if (!formData.name.trim()) errs.name = t("contact.errors.nameRequired");
     if (!formData.email.trim()) {
-      errs.email = "Email is required.";
+      errs.email = t("contact.errors.emailRequired");
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errs.email = "Please enter a valid email.";
+      errs.email = t("contact.errors.emailInvalid");
     }
     if (formData.phone && !/^[+\d\s()-]{7,}$/.test(formData.phone)) {
-      errs.phone = "Please enter a valid phone number.";
+      errs.phone = t("contact.errors.phoneInvalid");
     }
-    if (!formData.message.trim()) errs.message = "Message is required.";
+    if (!formData.message.trim()) errs.message = t("contact.errors.messageRequired");
     return errs;
   }
 
@@ -113,16 +116,15 @@ export default function ContactPage() {
               variants={fadeUp}
               className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl"
             >
-              Where to{" "}
-              <span className="gradient-text">Find Us</span>
+              {t("contact.title")}{" "}
+              <span className="gradient-text">{t("contact.titleAccent")}</span>
             </motion.h1>
             <motion.p
               custom={2}
               variants={fadeUp}
               className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-400"
             >
-              Have a question or want to get in touch? We&apos;d love to hear
-              from you. Reach out and let&apos;s start a conversation.
+              {t("contact.subtitle")}
             </motion.p>
           </motion.div>
         </div>
@@ -184,15 +186,14 @@ export default function ContactPage() {
                 variants={fadeUp}
                 className="text-3xl font-bold text-white"
               >
-                Send Us a <span className="gradient-text">Message</span>
+                {t("contact.sendMessage")}
               </motion.h2>
               <motion.p
                 custom={1}
                 variants={fadeUp}
                 className="mt-3 text-base leading-relaxed text-slate-400"
               >
-                Fill out the form below and we&apos;ll get back to you as soon
-                as possible.
+                {t("contact.formSubtitle")}
               </motion.p>
 
               {submitted ? (
@@ -216,11 +217,10 @@ export default function ContactPage() {
                     <CheckCircle className="size-8 text-white" />
                   </motion.div>
                   <h3 className="text-2xl font-semibold text-white">
-                    Message Sent!
+                    {t("contact.messageSent")}
                   </h3>
                   <p className="max-w-sm text-base text-slate-400">
-                    Thank you for reaching out. We&apos;ll get back to you
-                    shortly.
+                    {t("contact.thankYou")}
                   </p>
                   <Button
                     onClick={() => {
@@ -234,7 +234,7 @@ export default function ContactPage() {
                     }}
                     className="mt-3 h-12 rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 px-8 text-white shadow-lg shadow-green-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-green-500/30"
                   >
-                    Send Another Message
+                    {t("contact.sendAnother")}
                   </Button>
                 </motion.div>
               ) : (
@@ -249,11 +249,11 @@ export default function ContactPage() {
                       htmlFor="name"
                       className="text-sm font-medium text-slate-300"
                     >
-                      Name
+                      {t("contact.nameLabel")}
                     </Label>
                     <Input
                       id="name"
-                      placeholder="Your full name"
+                      placeholder={t("contact.namePlaceholder")}
                       value={formData.name}
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
@@ -277,12 +277,12 @@ export default function ContactPage() {
                       htmlFor="email"
                       className="text-sm font-medium text-slate-300"
                     >
-                      Email
+                      {t("contact.emailLabel")}
                     </Label>
                     <Input
                       id="email"
                       type="email"
-                      placeholder="you@example.com"
+                      placeholder={t("contact.emailPlaceholder")}
                       value={formData.email}
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
@@ -306,13 +306,12 @@ export default function ContactPage() {
                       htmlFor="phone"
                       className="text-sm font-medium text-slate-300"
                     >
-                      Phone{" "}
-                      <span className="text-slate-500">(optional)</span>
+                      {t("contact.phoneLabel")}
                     </Label>
                     <Input
                       id="phone"
                       type="tel"
-                      placeholder="+216 XX XXX XXX"
+                      placeholder={t("contact.phonePlaceholder")}
                       value={formData.phone}
                       onChange={(e) =>
                         setFormData({ ...formData, phone: e.target.value })
@@ -336,11 +335,11 @@ export default function ContactPage() {
                       htmlFor="message"
                       className="text-sm font-medium text-slate-300"
                     >
-                      Message
+                      {t("contact.messageLabel")}
                     </Label>
                     <Textarea
                       id="message"
-                      placeholder="How can we help you?"
+                      placeholder={t("contact.messagePlaceholder")}
                       rows={5}
                       value={formData.message}
                       onChange={(e) =>
@@ -365,7 +364,7 @@ export default function ContactPage() {
                     className="h-12 w-full rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 text-base font-semibold text-white shadow-lg shadow-green-500/25 transition-all duration-300 hover:shadow-xl hover:shadow-green-500/30 sm:w-auto sm:min-w-[200px]"
                   >
                     <Send className="mr-2 size-4" />
-                    Send Message
+                    {t("contact.sendButton")}
                   </Button>
                 </motion.form>
               )}
@@ -382,7 +381,7 @@ export default function ContactPage() {
                 variants={fadeUp}
                 className="text-3xl font-bold text-white"
               >
-                Our <span className="gradient-text">Location</span>
+                {t("contact.ourLocation")}
               </motion.h2>
               <motion.p
                 custom={1}
@@ -406,7 +405,7 @@ export default function ContactPage() {
                     <MapPin className="size-7 text-green-400" />
                   </div>
                   <p className="text-sm font-medium text-slate-400">
-                    Interactive map coming soon
+                    {t("contact.mapComingSoon")}
                   </p>
                 </div>
               </motion.div>

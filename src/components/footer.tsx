@@ -1,14 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { Phone, Mail, MapPin, Instagram, Facebook, Twitter } from "lucide-react";
-
-const quickLinks = [
-  { href: "/about", label: "About Us" },
-  { href: "/facilities", label: "Facilities" },
-  { href: "/pricing", label: "Membership" },
-  { href: "/reservations", label: "Book a Court" },
-  { href: "/contact", label: "Contact" },
-  { href: "/audit", label: "Site Audit" },
-];
+import { useTranslation } from "@/lib/language-context";
 
 const socialLinks = [
   { icon: Instagram, href: "#", label: "Instagram" },
@@ -17,6 +11,17 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const { t } = useTranslation();
+
+  const quickLinks = [
+    { href: "/about", label: t("footer.aboutUs") },
+    { href: "/facilities", label: t("nav.facilities") },
+    { href: "/pricing", label: t("footer.membership") },
+    { href: "/reservations", label: t("footer.bookACourt") },
+    { href: "/contact", label: t("nav.contact") },
+    { href: "/audit", label: t("footer.siteAudit") },
+  ];
+
   return (
     <footer className="relative overflow-hidden bg-slate-950">
       {/* Decorative gradients */}
@@ -37,8 +42,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
-              Tunisia&apos;s premier padel club. Professional courts, expert
-              coaching, and a vibrant community of passionate players.
+              {t("footer.description")}
             </p>
             <div className="mt-6 flex gap-3">
               {socialLinks.map((social) => (
@@ -57,7 +61,7 @@ export function Footer() {
           {/* Quick Links */}
           <div>
             <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-              Quick Links
+              {t("footer.quickLinks")}
             </h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
@@ -76,19 +80,19 @@ export function Footer() {
           {/* Hours */}
           <div>
             <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-              Opening Hours
+              {t("footer.openingHours")}
             </h3>
             <ul className="space-y-3 text-sm text-slate-400">
               <li className="flex justify-between">
-                <span>Monday - Friday</span>
+                <span>{t("footer.mondayFriday")}</span>
                 <span className="text-slate-300">06:00 - 23:00</span>
               </li>
               <li className="flex justify-between">
-                <span>Saturday</span>
+                <span>{t("footer.saturday")}</span>
                 <span className="text-slate-300">07:00 - 22:00</span>
               </li>
               <li className="flex justify-between">
-                <span>Sunday</span>
+                <span>{t("footer.sunday")}</span>
                 <span className="text-slate-300">08:00 - 21:00</span>
               </li>
             </ul>
@@ -97,7 +101,7 @@ export function Footer() {
           {/* Contact */}
           <div>
             <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-              Contact
+              {t("footer.contactTitle")}
             </h3>
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3">
@@ -136,13 +140,13 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col items-center justify-between gap-4 py-8 text-xs text-slate-600 sm:flex-row">
-          <span>&copy; 2026 Padel Society. All rights reserved.</span>
+          <span>{t("footer.copyright")}</span>
           <div className="flex gap-6">
             <a href="#" className="transition-colors hover:text-slate-400">
-              Privacy Policy
+              {t("footer.privacyPolicy")}
             </a>
             <a href="#" className="transition-colors hover:text-slate-400">
-              Terms of Service
+              {t("footer.termsOfService")}
             </a>
           </div>
         </div>

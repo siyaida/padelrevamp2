@@ -6,31 +6,30 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-
-const faqs = [
-  {
-    question: "What's included in the membership?",
-    answer:
-      "Every membership includes court access, our online booking system, and community features. Higher tiers unlock priority booking, match organization, performance tracking, group training sessions, and video analysis — depending on the plan you choose.",
-  },
-  {
-    question: "Can I cancel my membership?",
-    answer:
-      "Yes, you can cancel your membership at any time. Refunds are pro-rated for any unused months remaining in your subscription period.",
-  },
-  {
-    question: "How do I book a court?",
-    answer:
-      "Simply log in to your account, navigate to the Reservations page, and pick your preferred date, time, and court. Confirmation is instant.",
-  },
-  {
-    question: "Are there any joining fees?",
-    answer:
-      "No joining fees at all. Just pick your plan and start playing right away. Your membership begins the day you sign up.",
-  },
-];
+import { useTranslation } from "@/lib/language-context";
 
 export default function PricingFAQ() {
+  const { t } = useTranslation();
+
+  const faqs = [
+    {
+      question: t("pricing.faqItems.q1.question"),
+      answer: t("pricing.faqItems.q1.answer"),
+    },
+    {
+      question: t("pricing.faqItems.q2.question"),
+      answer: t("pricing.faqItems.q2.answer"),
+    },
+    {
+      question: t("pricing.faqItems.q3.question"),
+      answer: t("pricing.faqItems.q3.answer"),
+    },
+    {
+      question: t("pricing.faqItems.q4.question"),
+      answer: t("pricing.faqItems.q4.answer"),
+    },
+  ];
+
   return (
     <Accordion>
       {faqs.map((faq, index) => (

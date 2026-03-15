@@ -16,6 +16,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useTranslation } from "@/lib/language-context";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -26,100 +27,99 @@ const fadeUp = {
   }),
 };
 
-const courts = [
-  {
-    name: "Center Court",
-    type: "Competition",
-    description:
-      "Our premier competition court with professional lighting and spectator seating",
-    image:
-      "https://plus.unsplash.com/premium_photo-1708692919464-b5608dd10542",
-  },
-  {
-    name: "Indoor Courts",
-    type: "Indoor",
-    description:
-      "Climate-controlled indoor courts for year-round play",
-    image:
-      "https://images.unsplash.com/photo-1572854252129-a18ce4979ff4",
-  },
-  {
-    name: "Outdoor Courts",
-    type: "Outdoor",
-    description:
-      "Beautiful outdoor courts with perfect playing conditions",
-    image:
-      "https://plus.unsplash.com/premium_photo-1708692919998-e3dc853ef8a8",
-  },
-];
-
-const amenities = [
-  {
-    icon: Home,
-    name: "Clubhouse",
-    description: "Modern clubhouse with lounge area, cafe, and pro shop",
-    color: "from-green-500 to-emerald-600",
-  },
-  {
-    icon: Lock,
-    name: "Locker Rooms",
-    description: "Secure locker rooms with showers and changing facilities",
-    color: "from-blue-500 to-indigo-600",
-  },
-  {
-    icon: Wifi,
-    name: "Free Wi-Fi",
-    description: "High-speed internet access throughout the facility",
-    color: "from-violet-500 to-purple-600",
-  },
-  {
-    icon: Video,
-    name: "Video Analysis",
-    description: "Professional video analysis system for game improvement",
-    color: "from-amber-500 to-orange-600",
-  },
-  {
-    icon: ShoppingBag,
-    name: "Pro Shop",
-    description: "Full-service pro shop with equipment and accessories",
-    color: "from-rose-500 to-pink-600",
-  },
-  {
-    icon: Coffee,
-    name: "Cafe",
-    description: "On-site cafe serving refreshments and light meals",
-    color: "from-teal-500 to-cyan-600",
-  },
-];
-
-const equipment = [
-  {
-    item: "Premium Racket",
-    price: "15 TND/hour",
-    image:
-      "https://cdn.prod.website-files.com/633ef203ebdc24568b41624b/6656de4b39c52b0793bc7ac2__MS_3641-Edit-6522x4416-fae5400.jpg",
-  },
-  {
-    item: "Balls (3-pack)",
-    price: "10 TND",
-    image:
-      "https://www.tennisleo.fi/wp-content/uploads/2023/09/Erilaisia-padelpalloja-jpg.webp",
-  },
-  {
-    item: "Shoes",
-    price: "20 TND/day",
-    image:
-      "https://justpadel.com/cdn/shop/articles/8f7e04620390e7d4810bd7dde7e1754f.jpg",
-  },
-  {
-    item: "Training Kit",
-    price: "30 TND/session",
-    image:
-      "https://thepadelschool.com/wp-content/uploads/2023/07/padel-equipment-I-need-1.jpg",
-  },
-];
-
 export default function FacilitiesPage() {
+  const { t } = useTranslation();
+
+  const courts = [
+    {
+      name: t("facilities.courts.centerCourt.name"),
+      type: t("facilities.courts.centerCourt.type"),
+      description: t("facilities.courts.centerCourt.description"),
+      image:
+        "https://plus.unsplash.com/premium_photo-1708692919464-b5608dd10542",
+    },
+    {
+      name: t("facilities.courts.indoorCourts.name"),
+      type: t("facilities.courts.indoorCourts.type"),
+      description: t("facilities.courts.indoorCourts.description"),
+      image:
+        "https://images.unsplash.com/photo-1572854252129-a18ce4979ff4",
+    },
+    {
+      name: t("facilities.courts.outdoorCourts.name"),
+      type: t("facilities.courts.outdoorCourts.type"),
+      description: t("facilities.courts.outdoorCourts.description"),
+      image:
+        "https://plus.unsplash.com/premium_photo-1708692919998-e3dc853ef8a8",
+    },
+  ];
+
+  const amenities = [
+    {
+      icon: Home,
+      name: t("facilities.amenities.clubhouse.name"),
+      description: t("facilities.amenities.clubhouse.description"),
+      color: "from-green-500 to-emerald-600",
+    },
+    {
+      icon: Lock,
+      name: t("facilities.amenities.lockerRooms.name"),
+      description: t("facilities.amenities.lockerRooms.description"),
+      color: "from-blue-500 to-indigo-600",
+    },
+    {
+      icon: Wifi,
+      name: t("facilities.amenities.wifi.name"),
+      description: t("facilities.amenities.wifi.description"),
+      color: "from-violet-500 to-purple-600",
+    },
+    {
+      icon: Video,
+      name: t("facilities.amenities.videoAnalysis.name"),
+      description: t("facilities.amenities.videoAnalysis.description"),
+      color: "from-amber-500 to-orange-600",
+    },
+    {
+      icon: ShoppingBag,
+      name: t("facilities.amenities.proShop.name"),
+      description: t("facilities.amenities.proShop.description"),
+      color: "from-rose-500 to-pink-600",
+    },
+    {
+      icon: Coffee,
+      name: t("facilities.amenities.cafe.name"),
+      description: t("facilities.amenities.cafe.description"),
+      color: "from-teal-500 to-cyan-600",
+    },
+  ];
+
+  const equipment = [
+    {
+      item: t("facilities.equipment.racket.name"),
+      price: t("facilities.equipment.racket.price"),
+      image:
+        "https://cdn.prod.website-files.com/633ef203ebdc24568b41624b/6656de4b39c52b0793bc7ac2__MS_3641-Edit-6522x4416-fae5400.jpg",
+    },
+    {
+      item: t("facilities.equipment.balls.name"),
+      price: t("facilities.equipment.balls.price"),
+      image:
+        "https://www.tennisleo.fi/wp-content/uploads/2023/09/Erilaisia-padelpalloja-jpg.webp",
+    },
+    {
+      item: t("facilities.equipment.shoes.name"),
+      price: t("facilities.equipment.shoes.price"),
+      image:
+        "https://justpadel.com/cdn/shop/articles/8f7e04620390e7d4810bd7dde7e1754f.jpg",
+    },
+    {
+      item: t("facilities.equipment.trainingKit.name"),
+      price: t("facilities.equipment.trainingKit.price"),
+      image:
+        "https://thepadelschool.com/wp-content/uploads/2023/07/padel-equipment-I-need-1.jpg",
+    },
+  ];
+
   return (
     <>
       {/* Hero Section */}
@@ -151,7 +151,7 @@ export default function FacilitiesPage() {
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-green-500/20 bg-green-500/10 px-4 py-1.5">
                 <div className="size-2 rounded-full bg-green-400 animate-pulse" />
                 <span className="text-sm font-medium text-green-400">
-                  World-Class Venues
+                  {t("facilities.badge")}
                 </span>
               </div>
             </motion.div>
@@ -166,8 +166,7 @@ export default function FacilitiesPage() {
               }}
               className="text-5xl font-bold leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl"
             >
-              Our{" "}
-              <span className="gradient-text">Facilities</span>
+              {t("facilities.title")}
             </motion.h1>
 
             <motion.p
@@ -180,9 +179,7 @@ export default function FacilitiesPage() {
               }}
               className="mt-6 max-w-lg text-lg leading-relaxed text-slate-400"
             >
-              Experience padel in a world-class environment with
-              state-of-the-art courts and premium amenities designed for
-              players of every level.
+              {t("facilities.subtitle")}
             </motion.p>
 
             <motion.div
@@ -197,7 +194,7 @@ export default function FacilitiesPage() {
             >
               <Link href="/reservations">
                 <Button className="h-14 bg-green-600 px-8 text-base font-semibold text-white shadow-2xl shadow-green-600/30 transition-all hover:bg-green-500 hover:shadow-green-600/40 hover:-translate-y-0.5">
-                  Book a Court
+                  {t("facilities.exploreCourts")}
                   <ArrowRight className="ml-2 size-4" />
                 </Button>
               </Link>
@@ -233,13 +230,13 @@ export default function FacilitiesPage() {
             className="text-center"
           >
             <span className="text-sm font-semibold uppercase tracking-[0.2em] text-green-400">
-              Play Your Way
+              {t("facilities.courtsLabel")}
             </span>
             <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-              Professional Courts
+              {t("facilities.courtsLabel")}
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-400">
-              10 premium courts designed for players of all levels
+              {t("facilities.courtsSubtitle")}
             </p>
           </motion.div>
 
@@ -294,13 +291,13 @@ export default function FacilitiesPage() {
             className="text-center"
           >
             <span className="text-sm font-semibold uppercase tracking-[0.2em] text-green-600">
-              Beyond the Court
+              {t("facilities.amenitiesLabel")}
             </span>
             <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl lg:text-5xl">
-              Premium Amenities
+              {t("facilities.amenitiesLabel")}
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-500">
-              Everything you need for the perfect padel experience
+              {t("facilities.amenitiesSubtitle")}
             </p>
           </motion.div>
 
@@ -330,7 +327,7 @@ export default function FacilitiesPage() {
                         {amenity.description}
                       </p>
                       <div className="flex items-center gap-1 text-sm font-medium text-green-600 opacity-0 transition-all duration-300 group-hover:opacity-100">
-                        Learn more <ChevronRight className="size-3.5" />
+                        {t("facilities.learnMore")} <ChevronRight className="size-3.5" />
                       </div>
                     </CardContent>
                   </Card>
@@ -354,13 +351,13 @@ export default function FacilitiesPage() {
             className="text-center"
           >
             <span className="text-sm font-semibold uppercase tracking-[0.2em] text-green-600">
-              Gear Up
+              {t("facilities.equipmentLabel")}
             </span>
             <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl lg:text-5xl">
-              Equipment Rental
+              {t("facilities.equipmentLabel")}
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-500">
-              Don&apos;t have your own gear? We&apos;ve got you covered
+              {t("facilities.equipmentSubtitle")}
             </p>
           </motion.div>
 
@@ -414,17 +411,15 @@ export default function FacilitiesPage() {
             variants={fadeUp}
           >
             <h2 className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
-              Ready to{" "}
-              <span className="gradient-text">Play?</span>
+              {t("facilities.readyToPlay")}
             </h2>
             <p className="mt-6 text-lg text-slate-400">
-              Book a court now and experience our world-class facilities.
-              Your perfect game starts here.
+              {t("facilities.ctaSubtitle")}
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link href="/reservations">
                 <Button className="h-14 bg-green-600 px-10 text-base font-semibold text-white shadow-2xl shadow-green-600/30 transition-all hover:bg-green-500 hover:shadow-green-600/40 hover:-translate-y-0.5">
-                  Book a Court
+                  {t("facilities.bookNow")}
                   <ArrowRight className="ml-2 size-4" />
                 </Button>
               </Link>
@@ -433,7 +428,7 @@ export default function FacilitiesPage() {
                   variant="outline"
                   className="h-14 border-white/20 bg-white/5 px-10 text-base text-white hover:bg-white/10"
                 >
-                  Contact Us
+                  {t("facilities.contactUs")}
                 </Button>
               </Link>
             </div>

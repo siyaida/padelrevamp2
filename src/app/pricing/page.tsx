@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import PricingFAQ from "./faq";
+import { useTranslation } from "@/lib/language-context";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -22,85 +23,87 @@ const fadeUp = {
   }),
 };
 
-const plans = [
-  {
-    name: "Starter",
-    subtitle: "cours",
-    price: 120,
-    period: "year",
-    tickets: 10,
-    popular: false,
-    features: [
-      "Access to all courts",
-      "Online booking",
-      "Community access",
-    ],
-  },
-  {
-    name: "Match",
-    subtitle: "match",
-    price: 230,
-    period: "year",
-    tickets: 10,
-    popular: true,
-    features: [
-      "All Starter features",
-      "Priority booking",
-      "Match organization",
-      "Performance tracking",
-    ],
-  },
-  {
-    name: "Padel 10",
-    subtitle: "padel",
-    price: 250,
-    period: "year",
-    tickets: 10,
-    popular: false,
-    features: [
-      "All Match features",
-      "10 padel sessions included",
-      "Equipment discount",
-    ],
-  },
-  {
-    name: "Mixed",
-    subtitle: "mixed",
-    price: 300,
-    period: "year",
-    tickets: 20,
-    popular: false,
-    features: [
-      "All Padel 10 features",
-      "Group training sessions",
-      "Tournament entry",
-      "Video analysis session",
-    ],
-  },
-];
-
-const services = [
-  {
-    icon: Dumbbell,
-    name: "Private Coaching",
-    description: "One-on-one sessions with professional coaches",
-    price: "From 60 TND/hour",
-  },
-  {
-    icon: Users,
-    name: "Group Training",
-    description: "Join group sessions for all skill levels",
-    price: "From 30 TND/session",
-  },
-  {
-    icon: Video,
-    name: "Video Analysis",
-    description: "Professional game analysis and feedback",
-    price: "80 TND/session",
-  },
-];
-
 export default function PricingPage() {
+  const { t } = useTranslation();
+
+  const plans = [
+    {
+      name: t("pricing.plans.starter.name"),
+      subtitle: "cours",
+      price: 120,
+      period: "year",
+      tickets: 10,
+      popular: false,
+      features: [
+        t("pricing.plans.starter.features.0"),
+        t("pricing.plans.starter.features.1"),
+        t("pricing.plans.starter.features.2"),
+      ],
+    },
+    {
+      name: t("pricing.plans.match.name"),
+      subtitle: "match",
+      price: 230,
+      period: "year",
+      tickets: 10,
+      popular: true,
+      features: [
+        t("pricing.plans.match.features.0"),
+        t("pricing.plans.match.features.1"),
+        t("pricing.plans.match.features.2"),
+        t("pricing.plans.match.features.3"),
+      ],
+    },
+    {
+      name: t("pricing.plans.padel10.name"),
+      subtitle: "padel",
+      price: 250,
+      period: "year",
+      tickets: 10,
+      popular: false,
+      features: [
+        t("pricing.plans.padel10.features.0"),
+        t("pricing.plans.padel10.features.1"),
+        t("pricing.plans.padel10.features.2"),
+      ],
+    },
+    {
+      name: t("pricing.plans.mixed.name"),
+      subtitle: "mixed",
+      price: 300,
+      period: "year",
+      tickets: 20,
+      popular: false,
+      features: [
+        t("pricing.plans.mixed.features.0"),
+        t("pricing.plans.mixed.features.1"),
+        t("pricing.plans.mixed.features.2"),
+        t("pricing.plans.mixed.features.3"),
+      ],
+    },
+  ];
+
+  const services = [
+    {
+      icon: Dumbbell,
+      name: t("pricing.services.privateCoaching.name"),
+      description: t("pricing.services.privateCoaching.description"),
+      price: t("pricing.services.privateCoaching.price"),
+    },
+    {
+      icon: Users,
+      name: t("pricing.services.groupTraining.name"),
+      description: t("pricing.services.groupTraining.description"),
+      price: t("pricing.services.groupTraining.price"),
+    },
+    {
+      icon: Video,
+      name: t("pricing.services.videoAnalysis.name"),
+      description: t("pricing.services.videoAnalysis.description"),
+      price: t("pricing.services.videoAnalysis.price"),
+    },
+  ];
+
   return (
     <>
       {/* Hero */}
@@ -121,7 +124,7 @@ export default function PricingPage() {
             custom={0}
           >
             <Badge className="mb-6 inline-flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/10 px-4 py-1.5 text-xs font-medium text-green-400">
-              Flexible Plans
+              {t("pricing.badge")}
             </Badge>
           </motion.div>
 
@@ -133,8 +136,8 @@ export default function PricingPage() {
             variants={fadeUp}
             custom={1}
           >
-            Membership &amp;{" "}
-            <span className="gradient-text">Pricing</span>
+            {t("pricing.title")}{" "}
+            <span className="gradient-text">{t("pricing.titleAccent")}</span>
           </motion.h1>
 
           <motion.p
@@ -145,8 +148,7 @@ export default function PricingPage() {
             variants={fadeUp}
             custom={2}
           >
-            Choose the perfect membership plan for your padel journey.
-            Every plan includes court access and our seamless booking system.
+            {t("pricing.subtitle")}
           </motion.p>
         </div>
       </section>
@@ -163,10 +165,10 @@ export default function PricingPage() {
             custom={0}
           >
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Find Your Perfect Plan
+              {t("pricing.findPlan")}
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-slate-600">
-              From casual players to dedicated athletes, we have a membership tier for every level.
+              {t("pricing.planSubtitle")}
             </p>
           </motion.div>
 
@@ -191,7 +193,7 @@ export default function PricingPage() {
                   {plan.popular && (
                     <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
                       <Badge className="rounded-full bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-400 px-4 py-1 text-xs font-bold text-slate-900 shadow-md shadow-amber-500/20">
-                        Most Popular
+                        {t("pricing.mostPopular")}
                       </Badge>
                     </div>
                   )}
@@ -209,10 +211,10 @@ export default function PricingPage() {
                       </span>
                     </div>
                     <p className="mt-1 text-sm text-slate-400">
-                      per {plan.period}
+                      {t("pricing.perYear")}
                     </p>
                     <p className="mt-3 inline-block rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-600">
-                      {plan.tickets} tickets included
+                      {plan.tickets} {t("pricing.ticketsIncluded")}
                     </p>
                   </CardHeader>
 
@@ -242,7 +244,7 @@ export default function PricingPage() {
                           : "bg-slate-800 hover:bg-slate-700"
                       }`}
                     >
-                      Get Started
+                      {t("pricing.getStarted")}
                     </Link>
                   </CardFooter>
                 </Card>
@@ -269,11 +271,10 @@ export default function PricingPage() {
             custom={0}
           >
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Additional{" "}
-              <span className="gradient-text">Services</span>
+              {t("pricing.servicesLabel")}
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-slate-400">
-              Enhance your game with our professional services
+              {t("pricing.servicesSubtitle")}
             </p>
           </motion.div>
 
@@ -324,10 +325,10 @@ export default function PricingPage() {
             custom={0}
           >
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Frequently Asked Questions
+              {t("pricing.faq")}
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-slate-600">
-              Everything you need to know about our memberships
+              {t("pricing.faqSubtitle")}
             </p>
           </motion.div>
 

@@ -10,12 +10,7 @@ import { BookingSummary } from "@/components/booking/booking-summary";
 import { CalendarDays, LayoutGrid, Clock, ChevronRight, ArrowLeft, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Court, TimeSlot } from "@/lib/mock-data";
-
-const STEPS = [
-  { id: 1, label: "Select Date", icon: CalendarDays },
-  { id: 2, label: "Choose Court", icon: LayoutGrid },
-  { id: 3, label: "Pick Time", icon: Clock },
-];
+import { useTranslation } from "@/lib/language-context";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -25,6 +20,14 @@ const fadeUp = {
 };
 
 export default function ReservationsPage() {
+  const { t } = useTranslation();
+
+  const STEPS = [
+    { id: 1, label: t("reservations.steps.selectDate"), icon: CalendarDays },
+    { id: 2, label: t("reservations.steps.chooseCourt"), icon: LayoutGrid },
+    { id: 3, label: t("reservations.steps.pickTime"), icon: Clock },
+  ];
+
   const [step, setStep] = useState(1);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedCourt, setSelectedCourt] = useState<Court | null>(null);
@@ -82,10 +85,10 @@ export default function ReservationsPage() {
             transition={{ duration: 0.5 }}
           >
             <h1 className="text-3xl sm:text-5xl font-bold mb-3">
-              <span className="gradient-text">Book a Court</span>
+              <span className="gradient-text">{t("reservations.title")} <span>{t("reservations.titleAccent")}</span></span>
             </h1>
             <p className="text-slate-400 text-lg sm:text-xl max-w-lg">
-              Reserve your padel court in just a few steps
+              {t("reservations.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -203,7 +206,7 @@ export default function ReservationsPage() {
                   className="flex items-center gap-2 text-sm text-slate-500 hover:text-green-600 mb-5 cursor-pointer group transition-colors duration-200"
                 >
                   <ArrowLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-1" />
-                  <span className="font-medium">Back</span>
+                  <span className="font-medium">{t("reservations.back")}</span>
                 </motion.button>
               )}
             </AnimatePresence>
@@ -221,11 +224,11 @@ export default function ReservationsPage() {
                       <CalendarDays className="size-4" />
                     </div>
                     <h2 className="text-xl font-bold text-slate-900">
-                      Select a Date
+                      {t("reservations.selectDateHeading")}
                     </h2>
                   </div>
                   <p className="text-sm text-slate-500 mb-6 ml-11">
-                    Choose your preferred date for playing
+                    {t("reservations.selectDateSubtitle")}
                   </p>
                   <DatePicker
                     selectedDate={selectedDate}
@@ -248,11 +251,11 @@ export default function ReservationsPage() {
                       <LayoutGrid className="size-4" />
                     </div>
                     <h2 className="text-xl font-bold text-slate-900">
-                      Choose a Court
+                      {t("reservations.chooseCourtHeading")}
                     </h2>
                   </div>
                   <p className="text-sm text-slate-500 mb-6 ml-11">
-                    Select from our {10} available courts
+                    {t("reservations.chooseCourtSubtitle")}
                   </p>
                   <CourtSelector
                     selectedDate={selectedDate}
@@ -274,11 +277,11 @@ export default function ReservationsPage() {
                       <Clock className="size-4" />
                     </div>
                     <h2 className="text-xl font-bold text-slate-900">
-                      Pick a Time Slot
+                      {t("reservations.pickTimeHeading")}
                     </h2>
                   </div>
                   <p className="text-sm text-slate-500 mb-6 ml-11">
-                    Available times for {selectedCourt.name}
+                    {t("reservations.pickTimeSubtitle")} {selectedCourt.name}
                   </p>
                   <TimeSlots
                     court={selectedCourt}

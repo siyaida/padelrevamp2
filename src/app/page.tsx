@@ -18,6 +18,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "@/lib/language-context";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -28,86 +29,79 @@ const fadeUp = {
   }),
 };
 
-const features = [
-  {
-    icon: Calendar,
-    title: "Easy Court Booking",
-    description:
-      "Book your court anytime, anywhere with our simple online booking system.",
-    color: "from-green-500 to-emerald-600",
-  },
-  {
-    icon: Users,
-    title: "Professional Coaching",
-    description:
-      "Learn from certified coaches and improve your game with personalized training.",
-    color: "from-blue-500 to-indigo-600",
-  },
-  {
-    icon: Trophy,
-    title: "Tournaments",
-    description:
-      "Participate in regular tournaments and compete with players of all levels.",
-    color: "from-amber-500 to-orange-600",
-  },
-  {
-    icon: Heart,
-    title: "Community",
-    description:
-      "Join a vibrant community of padel enthusiasts and find your perfect match.",
-    color: "from-rose-500 to-pink-600",
-  },
-  {
-    icon: BarChart3,
-    title: "Performance Tracking",
-    description:
-      "Track your progress and analyze your game with detailed statistics.",
-    color: "from-violet-500 to-purple-600",
-  },
-  {
-    icon: Building2,
-    title: "Premium Facilities",
-    description:
-      "Experience padel on professional-grade courts with top-notch amenities.",
-    color: "from-teal-500 to-cyan-600",
-  },
-];
-
-const testimonials = [
-  {
-    name: "Youssef M.",
-    role: "Competitive Player",
-    quote:
-      "Padel Society has completely transformed my game. The coaching staff is world-class and the facilities are second to none in Tunisia.",
-    rating: 5,
-    avatar: "YM",
-  },
-  {
-    name: "Amira K.",
-    role: "Club Member",
-    quote:
-      "I joined as a complete beginner and the community made me feel welcome from day one. Now I play three times a week!",
-    rating: 5,
-    avatar: "AK",
-  },
-  {
-    name: "Mehdi B.",
-    role: "Tournament Player",
-    quote:
-      "The tournament organization is fantastic. It's the best competitive padel experience you can find in the region.",
-    rating: 5,
-    avatar: "MB",
-  },
-];
-
-const stats = [
-  { value: "500+", label: "Active Members" },
-  { value: "10", label: "Premium Courts" },
-  { value: "20+", label: "Tournaments / Year" },
-  { value: "15+", label: "Expert Coaches" },
-];
-
 export default function HomePage() {
+  const { t } = useTranslation();
+
+  const features = [
+    {
+      icon: Calendar,
+      title: t("home.features.easyBooking.title"),
+      description: t("home.features.easyBooking.description"),
+      color: "from-green-500 to-emerald-600",
+    },
+    {
+      icon: Users,
+      title: t("home.features.coaching.title"),
+      description: t("home.features.coaching.description"),
+      color: "from-blue-500 to-indigo-600",
+    },
+    {
+      icon: Trophy,
+      title: t("home.features.tournaments.title"),
+      description: t("home.features.tournaments.description"),
+      color: "from-amber-500 to-orange-600",
+    },
+    {
+      icon: Heart,
+      title: t("home.features.community.title"),
+      description: t("home.features.community.description"),
+      color: "from-rose-500 to-pink-600",
+    },
+    {
+      icon: BarChart3,
+      title: t("home.features.performance.title"),
+      description: t("home.features.performance.description"),
+      color: "from-violet-500 to-purple-600",
+    },
+    {
+      icon: Building2,
+      title: t("home.features.facilities.title"),
+      description: t("home.features.facilities.description"),
+      color: "from-teal-500 to-cyan-600",
+    },
+  ];
+
+  const testimonials = [
+    {
+      name: "Youssef M.",
+      role: t("home.testimonialData.youssef.role"),
+      quote: t("home.testimonialData.youssef.quote"),
+      rating: 5,
+      avatar: "YM",
+    },
+    {
+      name: "Amira K.",
+      role: t("home.testimonialData.amira.role"),
+      quote: t("home.testimonialData.amira.quote"),
+      rating: 5,
+      avatar: "AK",
+    },
+    {
+      name: "Mehdi B.",
+      role: t("home.testimonialData.mehdi.role"),
+      quote: t("home.testimonialData.mehdi.quote"),
+      rating: 5,
+      avatar: "MB",
+    },
+  ];
+
+  const stats = [
+    { value: "500+", label: t("home.stats.activeMembers") },
+    { value: "10", label: t("home.stats.premiumCourts") },
+    { value: "20+", label: t("home.stats.tournaments") },
+    { value: "15+", label: t("home.stats.coaches") },
+  ];
+
   return (
     <>
       {/* Hero Section */}
@@ -139,7 +133,7 @@ export default function HomePage() {
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-green-500/20 bg-green-500/10 px-4 py-1.5">
                 <div className="size-2 rounded-full bg-green-400 animate-pulse" />
                 <span className="text-sm font-medium text-green-400">
-                  Tunisia&apos;s #1 Padel Club
+                  {t("home.badge")}
                 </span>
               </div>
             </motion.div>
@@ -154,9 +148,9 @@ export default function HomePage() {
               }}
               className="text-5xl font-bold leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl"
             >
-              Elevate Your
+              {t("home.heroTitle1")}
               <br />
-              <span className="gradient-text">Padel Game</span>
+              <span className="gradient-text">{t("home.heroTitle2")}</span>
             </motion.h1>
 
             <motion.p
@@ -169,8 +163,7 @@ export default function HomePage() {
               }}
               className="mt-6 max-w-lg text-lg leading-relaxed text-slate-400"
             >
-              World-class courts, expert coaching, and a passionate community.
-              Join Padel Society and experience the best padel in Tunisia.
+              {t("home.heroSubtitle")}
             </motion.p>
 
             <motion.div
@@ -185,7 +178,7 @@ export default function HomePage() {
             >
               <Link href="/reservations">
                 <Button className="h-14 bg-green-600 px-8 text-base font-semibold text-white shadow-2xl shadow-green-600/30 transition-all hover:bg-green-500 hover:shadow-green-600/40 hover:-translate-y-0.5">
-                  Book a Court
+                  {t("home.bookACourt")}
                   <ArrowRight className="ml-2 size-4" />
                 </Button>
               </Link>
@@ -195,7 +188,7 @@ export default function HomePage() {
                   className="group h-14 border-white/20 bg-white/5 px-8 text-base font-semibold text-white backdrop-blur-sm hover:bg-white/10 hover:border-white/30"
                 >
                   <Play className="mr-2 size-4 transition-transform group-hover:scale-110" />
-                  Explore Facilities
+                  {t("home.exploreFacilities")}
                 </Button>
               </Link>
             </motion.div>
@@ -210,7 +203,7 @@ export default function HomePage() {
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           <div className="flex flex-col items-center gap-2 text-slate-500">
-            <span className="text-xs uppercase tracking-widest">Scroll</span>
+            <span className="text-xs uppercase tracking-widest">{t("home.scroll")}</span>
             <div className="h-12 w-px bg-gradient-to-b from-slate-500 to-transparent" />
           </div>
         </motion.div>
@@ -255,14 +248,13 @@ export default function HomePage() {
             className="text-center"
           >
             <span className="text-sm font-semibold uppercase tracking-[0.2em] text-green-600">
-              Why Choose Us
+              {t("home.whyChooseUs")}
             </span>
             <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl lg:text-5xl">
-              Everything You Need
+              {t("home.everythingYouNeed")}
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-500">
-              From booking courts to tracking your performance, we provide a
-              complete padel experience.
+              {t("home.everythingSubtitle")}
             </p>
           </motion.div>
 
@@ -290,7 +282,7 @@ export default function HomePage() {
                       {feature.description}
                     </p>
                     <div className="flex items-center gap-1 text-sm font-medium text-green-600 opacity-0 transition-all duration-300 group-hover:opacity-100">
-                      Learn more <ChevronRight className="size-3.5" />
+                      {t("home.learnMore")} <ChevronRight className="size-3.5" />
                     </div>
                   </CardContent>
                 </Card>
@@ -314,33 +306,33 @@ export default function HomePage() {
             className="text-center"
           >
             <span className="text-sm font-semibold uppercase tracking-[0.2em] text-green-400">
-              World-Class Venues
+              {t("home.worldClassVenues")}
             </span>
             <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-              Premium Courts
+              {t("home.premiumCourts")}
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-400">
-              10 professional-grade courts designed for players of all levels
+              {t("home.premiumCourtsSubtitle")}
             </p>
           </motion.div>
 
           <div className="mt-16 grid gap-6 md:grid-cols-3">
             {[
               {
-                name: "Center Court",
-                type: "Competition",
+                name: t("home.courts.centerCourt"),
+                type: t("home.courts.competition"),
                 image:
                   "https://plus.unsplash.com/premium_photo-1708692919464-b5608dd10542",
               },
               {
-                name: "Indoor Courts",
-                type: "Indoor",
+                name: t("home.courts.indoorCourts"),
+                type: t("home.courts.indoor"),
                 image:
                   "https://images.unsplash.com/photo-1572854252129-a18ce4979ff4",
               },
               {
-                name: "Outdoor Courts",
-                type: "Outdoor",
+                name: t("home.courts.outdoorCourts"),
+                type: t("home.courts.outdoor"),
                 image:
                   "https://plus.unsplash.com/premium_photo-1708692919998-e3dc853ef8a8",
               },
@@ -387,7 +379,7 @@ export default function HomePage() {
                 variant="outline"
                 className="border-white/20 bg-white/5 px-8 py-6 text-base text-white hover:bg-white/10"
               >
-                View All Facilities
+                {t("home.viewAllFacilities")}
                 <ArrowRight className="ml-2 size-4" />
               </Button>
             </Link>
@@ -408,10 +400,10 @@ export default function HomePage() {
             className="text-center"
           >
             <span className="text-sm font-semibold uppercase tracking-[0.2em] text-green-600">
-              Testimonials
+              {t("home.testimonials")}
             </span>
             <h2 className="mt-3 text-3xl font-bold text-slate-900 sm:text-4xl lg:text-5xl">
-              What Our Members Say
+              {t("home.whatMembersSay")}
             </h2>
           </motion.div>
 
@@ -476,17 +468,16 @@ export default function HomePage() {
             variants={fadeUp}
           >
             <h2 className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
-              Ready to{" "}
-              <span className="gradient-text">Start Playing?</span>
+              {t("home.readyToStart")}{" "}
+              <span className="gradient-text">{t("home.startPlaying")}</span>
             </h2>
             <p className="mt-6 text-lg text-slate-400">
-              Join 500+ members who&apos;ve made Padel Society their home court.
-              Book your first session today.
+              {t("home.ctaSubtitle")}
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link href="/reservations">
                 <Button className="h-14 bg-green-600 px-10 text-base font-semibold text-white shadow-2xl shadow-green-600/30 transition-all hover:bg-green-500 hover:shadow-green-600/40 hover:-translate-y-0.5">
-                  Book a Court
+                  {t("home.bookACourt")}
                   <ArrowRight className="ml-2 size-4" />
                 </Button>
               </Link>
@@ -495,7 +486,7 @@ export default function HomePage() {
                   variant="outline"
                   className="h-14 border-white/20 bg-white/5 px-10 text-base text-white hover:bg-white/10"
                 >
-                  Contact Us
+                  {t("home.contactUs")}
                 </Button>
               </Link>
             </div>

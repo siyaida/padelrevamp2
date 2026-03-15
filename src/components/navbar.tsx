@@ -6,21 +6,27 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/facilities", label: "Facilities" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/reservations", label: "Reservations" },
-  { href: "/contact", label: "Contact" },
-  { href: "/audit", label: "Audit" },
-];
+import { useTranslation } from "@/lib/language-context";
+import { LanguageToggle } from "@/components/language-toggle";
+import { useAuth } from "@/lib/auth-context";
+import { User } from "lucide-react";
 
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useTranslation();
+  const { isAuthenticated } = useAuth();
+
+  const navLinks = [
+    { href: "/", label: t("nav.home") },
+    { href: "/about", label: t("nav.about") },
+    { href: "/facilities", label: t("nav.facilities") },
+    { href: "/pricing", label: t("nav.pricing") },
+    { href: "/reservations", label: t("nav.reservations") },
+    { href: "/contact", label: t("nav.contact") },
+    { href: "/audit", label: t("nav.audit") },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -71,9 +77,16 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-4">
+          <LanguageToggle />
+          {isAuthenticated && (
+            <Link href="/player/dashboard" className="hidden items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-green-400 transition-all hover:bg-green-600/10 sm:flex">
+              <User className="size-4" />
+              {t("nav.mySpace")}
+            </Link>
+          )}
           <Link href="/reservations" className="hidden sm:block">
             <Button className="bg-green-600 px-6 text-sm font-semibold text-white shadow-lg shadow-green-600/25 transition-all hover:bg-green-500 hover:shadow-green-600/40 hover:-translate-y-0.5">
-              Book Now
+              {t("nav.bookNow")}
             </Button>
           </Link>
 
@@ -120,6 +133,25 @@ export function Navbar() {
                     </Link>
                   </motion.div>
                 ))}
+                {isAuthenticated && (
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: navLinks.length * 0.05 }}
+                  >
+                    <Link
+                      href="/player/dashboard"
+                      onClick={() => setOpen(false)}
+                      className="flex items-center gap-2 rounded-xl px-4 py-3 text-base font-medium text-green-400 transition-all hover:bg-green-600/10"
+                    >
+                      <User className="size-4" />
+                      {t("nav.mySpace")}
+                    </Link>
+                  </motion.div>
+                )}
+                <div className="flex justify-center py-2">
+                  <LanguageToggle />
+                </div>
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -127,7 +159,7 @@ export function Navbar() {
                 >
                   <Link href="/reservations" onClick={() => setOpen(false)}>
                     <Button className="mt-4 w-full bg-green-600 py-3 text-base font-semibold text-white shadow-lg shadow-green-600/25 hover:bg-green-500">
-                      Book Now
+                      {t("nav.bookNow")}
                     </Button>
                   </Link>
                 </motion.div>
