@@ -1,0 +1,501 @@
+export interface Finding {
+  severity: "critical" | "warning" | "info";
+  title: string;
+  description: string;
+  recommendation: string;
+}
+
+export interface Category {
+  name: string;
+  type: "ui" | "non-ui";
+  score: number;
+  weight: number;
+  findings: Finding[];
+}
+
+export interface AuditResult {
+  auditDate: string;
+  siteUrl: string;
+  businessName: string;
+  overallScore: number;
+  categories: Category[];
+}
+
+export const auditData: AuditResult = {
+  auditDate: "2026-03-15",
+  siteUrl: "https://padel.4prod.tn",
+  businessName: "Padel Society",
+  overallScore: 38,
+  categories: [
+    {
+      name: "Visual Design",
+      type: "ui",
+      score: 52,
+      weight: 0.15,
+      findings: [
+        {
+          severity: "warning",
+          title: "Inconsistent color palette",
+          description:
+            "The site uses a dark navy (#1e293b) theme on pricing cards and auth pages, but light/white backgrounds on content pages. The green CTA buttons clash with the blue header bar.",
+          recommendation:
+            "Establish a unified design system with a consistent primary/secondary/accent palette across all pages. Use sport-oriented greens and blues harmoniously.",
+        },
+        {
+          severity: "warning",
+          title: "Typography hierarchy is weak",
+          description:
+            "Headings and body text lack clear size differentiation. Feature cards on the home page use identical font weights making them blend together.",
+          recommendation:
+            "Define a clear type scale (e.g., 14/16/20/24/32/48px) with distinct weights for headings vs body. Ensure minimum 16px body text.",
+        },
+        {
+          severity: "info",
+          title: "Hero image is a stock photo from external CDN",
+          description:
+            "The hero image is hotlinked from clubmahindra.com — not a Padel Society asset. It could break at any time and adds latency.",
+          recommendation:
+            "Use self-hosted, high-quality padel imagery that represents the actual club. Optimize and serve via next/image.",
+        },
+        {
+          severity: "warning",
+          title: "Feature cards lack visual icons",
+          description:
+            "The 6 feature cards on the homepage are text-only with no icons or illustrations, reducing scannability.",
+          recommendation:
+            "Add sport-themed icons (Lucide or custom SVGs) to each feature card to improve visual hierarchy.",
+        },
+        {
+          severity: "info",
+          title: "No footer section",
+          description:
+            "The site has no visible footer with quick links, social media, or legal information.",
+          recommendation:
+            "Add a comprehensive footer with navigation links, social media icons, contact info, and legal links.",
+        },
+      ],
+    },
+    {
+      name: "Navigation & Information Architecture",
+      type: "ui",
+      score: 45,
+      weight: 0.05,
+      findings: [
+        {
+          severity: "critical",
+          title: "Broken Tournaments page (404)",
+          description:
+            "The admin sidebar links to /staff/tournaments which returns a 404 Page Not Found error.",
+          recommendation:
+            "Either implement the tournaments page or remove the navigation link.",
+        },
+        {
+          severity: "warning",
+          title: "No breadcrumb navigation",
+          description:
+            "Inner pages lack breadcrumbs, making it difficult to orient within the site hierarchy.",
+          recommendation: "Add breadcrumb navigation on all inner pages.",
+        },
+        {
+          severity: "warning",
+          title: "'Book your court' top bar leads to auth-gated page",
+          description:
+            "The persistent 'BOOK YOUR COURT' banner links to /player/bookings which requires login. New visitors hit a wall.",
+          recommendation:
+            "Show a preview of court availability for unauthenticated users, with a prompt to sign in to complete booking.",
+        },
+        {
+          severity: "info",
+          title: "Admin sidebar labels are misleading",
+          description:
+            "The 'Users' section contains Courts, Halls, Courses — not user management. 'Bookings' section has Scores, Rankings — unrelated to bookings.",
+          recommendation:
+            "Reorganize admin sidebar into logical groups: Facilities (Courts, Halls), Programs (Courses, Quizzes), Players (Scores, Rankings, Subscriptions), Operations (Complaints, Tournaments).",
+        },
+      ],
+    },
+    {
+      name: "Responsiveness",
+      type: "ui",
+      score: 40,
+      weight: 0.1,
+      findings: [
+        {
+          severity: "critical",
+          title: "No evidence of mobile-first design",
+          description:
+            "Screenshots show desktop-optimized layouts. Pricing cards appear in 3+ columns with no visible breakpoint adaptation. The login split-panel layout would not work well on mobile.",
+          recommendation:
+            "Implement mobile-first responsive design with proper breakpoints (sm: 640px, md: 768px, lg: 1024px, xl: 1280px). Stack cards vertically on mobile.",
+        },
+        {
+          severity: "warning",
+          title: "Navigation lacks mobile menu",
+          description:
+            "The 7-item horizontal navigation has no visible hamburger menu or mobile alternative.",
+          recommendation:
+            "Add a responsive hamburger menu for screens below 768px with slide-out or dropdown pattern.",
+        },
+        {
+          severity: "warning",
+          title: "Touch targets may be too small",
+          description:
+            "Navigation links and small text links (like 'Forgot password?') appear to be under the 44x44px minimum touch target size.",
+          recommendation:
+            "Ensure all interactive elements have a minimum 44x44px touch area.",
+        },
+      ],
+    },
+    {
+      name: "Component Quality",
+      type: "ui",
+      score: 35,
+      weight: 0.05,
+      findings: [
+        {
+          severity: "critical",
+          title: "Pricing plans contain test/placeholder data",
+          description:
+            "Plans named 'test', 'test aaa', 'abonnement Test' with descriptions like 'test0', 'test 1' are visible to public users on the pricing page. This severely damages credibility.",
+          recommendation:
+            "Clean up all test data. Display only production-ready plans with clear names, descriptions, and value propositions.",
+        },
+        {
+          severity: "warning",
+          title: "Forms lack validation feedback",
+          description:
+            "The contact form and auth forms show no inline validation states, error messages, or success feedback.",
+          recommendation:
+            "Add real-time inline validation with clear error/success states for all form fields.",
+        },
+        {
+          severity: "warning",
+          title: "CTA buttons inconsistent",
+          description:
+            "Mixed button styles: outlined ('Learn More'), filled ('Get Started'), and dark navy ('Select plan'). No consistent visual hierarchy.",
+          recommendation:
+            "Define primary, secondary, and ghost button variants. Use primary for main CTAs, secondary for alternatives.",
+        },
+        {
+          severity: "warning",
+          title: "FAQ section has no answers",
+          description:
+            "The Pricing page FAQ section shows 4 questions but the answers are not visible/expandable in the scraped content.",
+          recommendation:
+            "Implement an accordion FAQ component with clear expand/collapse interaction and comprehensive answers.",
+        },
+      ],
+    },
+    {
+      name: "Imagery",
+      type: "ui",
+      score: 30,
+      weight: 0.05,
+      findings: [
+        {
+          severity: "critical",
+          title: "All images are hotlinked from external sources",
+          description:
+            "Hero image from clubmahindra.com, team photos from pexels.com, court photos from unsplash.com, equipment from various CDNs. These could break, cause CORS issues, and add significant latency.",
+          recommendation:
+            "Download, optimize, and self-host all images. Use next/image with automatic WebP/AVIF conversion and lazy loading.",
+        },
+        {
+          severity: "warning",
+          title: "No alt text on images",
+          description:
+            "The hero image has a template variable '{{ $t('padel-court') }}' as alt text instead of actual descriptive text. Other images lack meaningful alt text.",
+          recommendation:
+            "Add descriptive alt text to all images for accessibility and SEO.",
+        },
+        {
+          severity: "warning",
+          title: "Images are not optimized",
+          description:
+            "External images are served in original format (JPEG/PNG) without modern format conversion or responsive sizing.",
+          recommendation:
+            "Use next/image to serve images in WebP/AVIF with responsive srcsets and proper lazy loading.",
+        },
+        {
+          severity: "info",
+          title: "No actual club photography",
+          description:
+            "All imagery is stock photos — none show the actual Padel Society facilities, courts, or team members.",
+          recommendation:
+            "Invest in professional photography of actual facilities. For the redesign, use high-quality padel stock photos as placeholders.",
+        },
+      ],
+    },
+    {
+      name: "SEO",
+      type: "non-ui",
+      score: 20,
+      weight: 0.15,
+      findings: [
+        {
+          severity: "critical",
+          title: "No meta tags or Open Graph data",
+          description:
+            "Pages lack title tags, meta descriptions, and Open Graph tags. Social sharing would show raw URLs with no preview.",
+          recommendation:
+            "Add unique title and meta description to every page. Implement Open Graph (og:title, og:description, og:image) and Twitter Card meta tags.",
+        },
+        {
+          severity: "critical",
+          title: "No sitemap.xml or robots.txt",
+          description:
+            "No sitemap or robots.txt detected, limiting search engine crawlability.",
+          recommendation:
+            "Generate a dynamic sitemap.xml and robots.txt. Use Next.js built-in metadata API.",
+        },
+        {
+          severity: "critical",
+          title: "No structured data (JSON-LD)",
+          description:
+            "No Schema.org markup for LocalBusiness, SportsActivityLocation, or Offer schemas.",
+          recommendation:
+            "Add JSON-LD structured data: LocalBusiness for the club, SportsActivityLocation for courts, Offer for pricing plans, FAQPage for the FAQ section.",
+        },
+        {
+          severity: "warning",
+          title: "No canonical URLs",
+          description:
+            "Pages lack canonical URL tags, risking duplicate content issues.",
+          recommendation: "Add canonical URL tags to all pages.",
+        },
+        {
+          severity: "warning",
+          title: "Template variable exposed in production",
+          description:
+            "The hero image alt text shows '{{ $t('padel-court') }}' — a Vue.js i18n template variable rendering raw instead of translated.",
+          recommendation:
+            "Fix the i18n setup to properly render translated strings, or hardcode alt text.",
+        },
+      ],
+    },
+    {
+      name: "Performance",
+      type: "non-ui",
+      score: 35,
+      weight: 0.2,
+      findings: [
+        {
+          severity: "critical",
+          title: "External image dependencies add latency",
+          description:
+            "Images loaded from 6+ different external domains (clubmahindra.com, pexels.com, unsplash.com, etc.) require separate DNS lookups and connections, dramatically increasing load time.",
+          recommendation:
+            "Self-host all images. Use CDN (Netlify's built-in CDN). Implement proper caching headers.",
+        },
+        {
+          severity: "critical",
+          title: "No image optimization pipeline",
+          description:
+            "Large unoptimized images served without lazy loading, modern formats, or responsive sizing.",
+          recommendation:
+            "Use next/image for automatic optimization: WebP/AVIF format, responsive srcsets, lazy loading, blur placeholders.",
+        },
+        {
+          severity: "warning",
+          title: "No visible code splitting or lazy loading",
+          description:
+            "The site appears to be a Vue.js SPA that likely loads all routes upfront.",
+          recommendation:
+            "Implement route-based code splitting with Next.js App Router. Use dynamic imports for heavy components.",
+        },
+        {
+          severity: "info",
+          title: "OpenStreetMap tiles on contact page",
+          description:
+            "Leaflet map loads multiple tile images on the contact page, adding to page weight.",
+          recommendation:
+            "Lazy-load the map component. Consider a static map image with click-to-interact pattern.",
+        },
+      ],
+    },
+    {
+      name: "Accessibility",
+      type: "non-ui",
+      score: 25,
+      weight: 0.15,
+      findings: [
+        {
+          severity: "critical",
+          title: "Images lack proper alt text",
+          description:
+            "Hero image has broken template variable as alt text. Team photos and court images have generic or missing alt text.",
+          recommendation:
+            "Add descriptive, meaningful alt text to all images. Use empty alt='' for purely decorative images.",
+        },
+        {
+          severity: "critical",
+          title: "No ARIA labels on interactive elements",
+          description:
+            "The dark mode toggle, language selector, and hamburger menu (if any) lack ARIA labels for screen readers.",
+          recommendation:
+            "Add aria-label to all icon-only buttons. Use proper ARIA roles for interactive widgets.",
+        },
+        {
+          severity: "warning",
+          title: "Color contrast concerns",
+          description:
+            "Light gray text on white backgrounds (subtitle text) may not meet WCAG 4.5:1 contrast ratio requirements.",
+          recommendation:
+            "Ensure all text meets WCAG AA contrast ratios: 4.5:1 for normal text, 3:1 for large text. Use a contrast checker.",
+        },
+        {
+          severity: "warning",
+          title: "Form fields lack visible labels",
+          description:
+            "Auth forms use placeholder text as labels which disappear on input, making it impossible to verify what field you're filling.",
+          recommendation:
+            "Add persistent visible labels above or beside all form fields. Use placeholder text only as example input.",
+        },
+        {
+          severity: "warning",
+          title: "No skip navigation link",
+          description:
+            "No 'Skip to main content' link for keyboard users to bypass the navigation.",
+          recommendation:
+            "Add a visually hidden skip link as the first focusable element on each page.",
+        },
+      ],
+    },
+    {
+      name: "Security",
+      type: "non-ui",
+      score: 40,
+      weight: 0.1,
+      findings: [
+        {
+          severity: "critical",
+          title: "Admin credentials are weak defaults",
+          description:
+            "The admin account uses a simple password 'AdminPass123!' that follows a predictable pattern.",
+          recommendation:
+            "Enforce strong password policies. Implement 2FA for admin accounts. Change default credentials.",
+        },
+        {
+          severity: "warning",
+          title: "No visible CSP headers",
+          description:
+            "Content Security Policy headers are likely missing, allowing potential XSS attacks with content from 6+ external domains.",
+          recommendation:
+            "Implement strict Content-Security-Policy headers. Whitelist only necessary external domains.",
+        },
+        {
+          severity: "warning",
+          title: "Contact form lacks CSRF/spam protection",
+          description:
+            "The contact form has no visible CAPTCHA, honeypot, or rate limiting.",
+          recommendation:
+            "Add reCAPTCHA or hCaptcha. Implement server-side rate limiting and CSRF tokens.",
+        },
+        {
+          severity: "info",
+          title: "Social login (Google/Facebook) implementation unknown",
+          description:
+            "OAuth buttons are present but security of the implementation cannot be verified from scraping alone.",
+          recommendation:
+            "Ensure OAuth follows best practices: state parameter, PKCE flow, proper token storage.",
+        },
+      ],
+    },
+    {
+      name: "Content",
+      type: "non-ui",
+      score: 30,
+      weight: 0.05,
+      findings: [
+        {
+          severity: "critical",
+          title: "Test/placeholder data visible to public",
+          description:
+            "Pricing page shows plans named 'test', 'test aaa' with features like 'test0', 'test 1'. This is production-damaging content.",
+          recommendation:
+            "Audit all CMS/admin content. Remove test data. Create proper plan names (Starter, Pro, Premium) with real feature descriptions.",
+        },
+        {
+          severity: "warning",
+          title: "Inconsistent language",
+          description:
+            "Site is in English but admin area shows French ('Accueil', 'janv.', 'fevr.', 'Mot de passe'). Login page mix shows both languages.",
+          recommendation:
+            "Fully implement i18n with proper EN/FR translations. Ensure consistent language per user preference.",
+        },
+        {
+          severity: "warning",
+          title: "Missing operating hours",
+          description:
+            "No operating hours displayed anywhere on the public site, despite courts having different schedules (05:00-23:00, 08:00-17:00, etc.).",
+          recommendation:
+            "Display operating hours prominently on the contact page and in the footer.",
+        },
+        {
+          severity: "info",
+          title: "No testimonials or social proof",
+          description:
+            "Despite claiming 500+ active members, there are zero testimonials, reviews, or social proof on the site.",
+          recommendation:
+            "Add a testimonials section with member quotes, ratings, or partner logos.",
+        },
+      ],
+    },
+    {
+      name: "Analytics",
+      type: "non-ui",
+      score: 15,
+      weight: 0.0,
+      findings: [
+        {
+          severity: "critical",
+          title: "No analytics tracking detected",
+          description:
+            "No Google Analytics, Plausible, or other analytics scripts found in the scraped output.",
+          recommendation:
+            "Implement privacy-respecting analytics (Plausible or GA4) with conversion tracking for bookings and signups.",
+        },
+        {
+          severity: "warning",
+          title: "No error monitoring",
+          description:
+            "No Sentry, LogRocket, or similar error tracking detected.",
+          recommendation:
+            "Set up error monitoring to catch runtime errors, especially on booking and payment flows.",
+        },
+      ],
+    },
+    {
+      name: "Legal",
+      type: "non-ui",
+      score: 10,
+      weight: 0.05,
+      findings: [
+        {
+          severity: "critical",
+          title: "No privacy policy",
+          description:
+            "The site collects personal data (registration, contact forms) but has no privacy policy page.",
+          recommendation:
+            "Create a comprehensive privacy policy page detailing data collection, usage, storage, and user rights.",
+        },
+        {
+          severity: "critical",
+          title: "No terms of service",
+          description:
+            "Registration requires accepting 'terms and conditions' but no link to actual terms is provided.",
+          recommendation:
+            "Draft and publish terms of service covering membership, booking, cancellation, and liability.",
+        },
+        {
+          severity: "warning",
+          title: "No cookie consent banner",
+          description:
+            "No cookie consent mechanism despite likely using session cookies and potentially third-party cookies (Google/Facebook OAuth).",
+          recommendation:
+            "Implement a GDPR-compliant cookie consent banner with granular control.",
+        },
+      ],
+    },
+  ],
+};

@@ -1,0 +1,58 @@
+{
+  "business_name": "Padel Society",
+  "tagline": "Tunisia's premier padel club",
+  "address": "Nouveau Club, 7 Rue du Royaume d'Arabie Saoudite, Tunis, Tunisie",
+  "phone": "+216 23 456 789",
+  "email": "nextconsulttn@gmail.com",
+  "social_media_links": [],
+  "operating_hours": [],
+  "stats": {
+    "active_members": "500+",
+    "premium_courts": 10,
+    "tournaments_per_year": 20
+  },
+  "team": [
+    {
+      "name": "Ahmed Ben Ali",
+      "role": "Club Director",
+      "bio": "Former professional player with 15 years of coaching experience",
+      "image": "https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg"
+    },
+    {
+      "name": "Sarah Smith",
+      "role": "Head Coach",
+      "bio": "Certified international coach specializing in player development",
+      "image": "https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg"
+    },
+    {
+      "name": "Mohamed Karim",
+      "role": "Operations Manager",
+      "bio": "Ensuring smooth operations and excellent member experience",
+      "image": "https://images.pexels.com/photos/3760323/pexels-photo-3760323.jpeg"
+    }
+  ],
+  "courts": [
+    {"name": "Center Court", "type": "Competition", "description": "Premier competition court with professional lighting and spectator seating"},
+    {"name": "Indoor Courts", "type": "Indoor", "description": "Climate-controlled indoor courts for year-round play"},
+    {"name": "Outdoor Courts", "type": "Outdoor", "description": "Beautiful outdoor courts with perfect playing conditions"}
+  ],
+  "membership_plans": [
+    {"name": "cours", "price": 120, "currency": "DT", "period": "year", "tickets": 10},
+    {"name": "match", "price": 230, "currency": "DT", "period": "year", "tickets": 10, "popular": true},
+    {"name": "Padel 10", "price": 250, "currency": "DT", "period": "year", "tickets": 10},
+    {"name": "mixed", "price": 300, "currency": "DT", "period": "year", "tickets": 20}
+  ],
+  "services": {
+    "coaching": {"private": "60 TND/hour", "group": "30 TND/session"},
+    "video_analysis": "80 TND/session",
+    "equipment_rental": [
+      {"item": "Premium Racket", "price": "15 TND/hour"},
+      {"item": "Balls (3-pack)", "price": "10 TND"},
+      {"item": "Shoes", "price": "20 TND/day"},
+      {"item": "Training Kit", "price": "30 TND/session"}
+    ]
+  },
+  "amenities": ["Clubhouse", "Locker Rooms", "Free Wi-Fi", "Video Analysis", "Pro Shop", "Cafe"],
+  "values": ["Excellence", "Community", "Passion", "Growth"],
+  "mission": "To provide a world class padel experience that combines professional facilities, expert coaching and a welcoming community atmosphere, we aim to make padel accessible to players of all levels while fostering a competitive and enjoyable environment."
+}

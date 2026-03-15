@@ -1,0 +1,53 @@
+{
+  "site_url": "https://padel.4prod.tn",
+  "pages": [
+    {"path": "/", "title": "Home", "status": "scraped"},
+    {"path": "/about", "title": "About / The Society Spirit", "status": "scraped"},
+    {"path": "/facilities", "title": "Facilities", "status": "scraped"},
+    {"path": "/pricing", "title": "Membership & Pricing", "status": "scraped"},
+    {"path": "/contact", "title": "Contact", "status": "scraped"},
+    {"path": "/login", "title": "Login", "status": "scraped"},
+    {"path": "/register", "title": "Register", "status": "scraped"},
+    {"path": "/forgot-password", "title": "Forgot Password", "status": "scraped"},
+    {"path": "/player/bookings", "title": "Book a Court (requires auth)", "status": "pending"}
+  ],
+  "navigation": {
+    "top_bar": "BOOK YOUR COURT → /player/bookings",
+    "main_nav": [
+      {"label": "The Society spirit", "href": "/about"},
+      {"label": "Facilities", "href": "/facilities"},
+      {"label": "Padel Society (logo)", "href": "/"},
+      {"label": "Pricing", "href": "/pricing"},
+      {"label": "Contact", "href": "/contact"}
+    ],
+    "actions": ["Dark Mode", "EN (language)", "Sign In", "Register"]
+  },
+  "asset_urls": {
+    "logos": [
+      "https://padel.4prod.tn/logo/Asset%2021.png",
+      "https://padel.4prod.tn/logo/Asset%2022.png"
+    ],
+    "backgrounds": [
+      "https://padel.4prod.tn/images/auth-bg.png"
+    ],
+    "hero": [
+      "https://www.clubmahindra.com/storage/app/media/Holiday%20Club%20Resorts/Saimaa%20Finland/Paddle%20tennis.jpg"
+    ],
+    "courts": [
+      "https://plus.unsplash.com/premium_photo-1708692919464-b5608dd10542",
+      "https://images.unsplash.com/photo-1572854252129-a18ce4979ff4",
+      "https://plus.unsplash.com/premium_photo-1708692919998-e3dc853ef8a8"
+    ],
+    "team": [
+      "https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg",
+      "https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg",
+      "https://images.pexels.com/photos/3760323/pexels-photo-3760323.jpeg"
+    ],
+    "equipment": [
+      "https://cdn.prod.website-files.com/633ef203ebdc24568b41624b/6656de4b39c52b0793bc7ac2__MS_3641-Edit-6522x4416-fae5400.jpg",
+      "https://www.tennisleo.fi/wp-content/uploads/2023/09/Erilaisia-padelpalloja-jpg.webp",
+      "https://justpadel.com/cdn/shop/articles/8f7e04620390e7d4810bd7dde7e1754f.jpg",
+      "https://thepadelschool.com/wp-content/uploads/2023/07/padel-equipment-I-need-1.jpg"
+    ]
+  }
+}
